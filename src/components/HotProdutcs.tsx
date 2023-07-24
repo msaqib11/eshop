@@ -5,8 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import { client } from "@/lib/sanityClient";
-import { Image as IImage } from "sanity";
-
+import { IProduct } from "@/lib/type";
 const getProductList = async () => {
   const res = client.fetch(`*[_type=="product"]{
     name,
@@ -15,18 +14,11 @@ const getProductList = async () => {
     subCategory->{
       name
     },
+    slug,
     images[0]
   }`);
   return res;
 };
-
-export interface IProduct {
-  name: string;
-  price: number;
-  subCategory: { name: string };
-  images: IImage;
-  className? : string 
-}
 
 const HotProdutcs = async () => {
   const data: IProduct[] = await getProductList();
@@ -66,7 +58,7 @@ const HotProdutcs = async () => {
               price = {product.price}
               subCategory={product.subCategory}
               images={product.images}
-              className=""
+              slug = {product.slug}
               />
             </SwiperSlide>
           ))}

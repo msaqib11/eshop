@@ -1,12 +1,6 @@
 import Products from "@/components/Products";
 import { client } from "@/lib/sanityClient";
-import { Image as IImage } from "sanity";
-export interface IProduct {
-  name: string;
-  price: number;
-  subCategory: { name: string };
-  images: IImage;
-}
+import { IProduct } from "@/lib/type";
 
 const category = async (param: string) => {
   const res =
@@ -14,6 +8,7 @@ const category = async (param: string) => {
     name,
     images,
     price,
+    slug,
     subCategory->{
       name
     },
@@ -30,13 +25,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <h1 className="text-center text-6xl md:mb-8 mt-4 uppercase">{params.slug}</h1>
       </div>
       {getCategory.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {getCategory.map((product) => (
             <Products
               name={product.name}
               price={product.price}
               subCategory={product.subCategory}
               images={product.images}
+              slug = {product.slug}
             />
           ))}
         </div>

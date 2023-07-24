@@ -19,10 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sora.className}`}>
         <Header/>
-        <main className='px-16 min-h-screen'>
+        <main className='px-16 min-h-screen max-w-7xl mx-auto'>
         {children}
         </main>
-        <hr className="w-full h-0.5 my-4 bg-gray-600 border-0 rounded md:my-4 dark:bg-gray-700" />
+        <hr className="w-full max-w-7xl mx-auto h-0.5 my-4 bg-gray-600 border-0 rounded md:my-4 dark:bg-gray-700" />
         <Footer/>
       </body>
     </html>

@@ -6,7 +6,7 @@ interface IClassName {
   }
 const Wrapper :React.FC<IClassName> = ({className,children}) => {
   return (
-    <div className={`w-full max-w-7xl px-16 mx-auto ${className || ""}`}>{children}</div>
+    <div className={`w-full max-w-7xl px-8 md:px-16 mx-auto ${className || ""}`}>{children}</div>
   )
 }
 

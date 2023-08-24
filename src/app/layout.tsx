@@ -2,6 +2,7 @@ import Header from '@/components/layout/Header'
 import './globals.css'
 import { Sora } from 'next/font/google'
 import Footer from '@/components/layout/Footer'
+import Wrapper from '@/components/layout/Wrapper'
 
 const sora = Sora({ subsets: ['latin'],weight : "600" })
 
@@ -19,9 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sora.className}`}>
         <Header/>
-        <main className='px-16 min-h-screen max-w-7xl mx-auto'>
+        <Wrapper className='min-h-screen'>
         {children}
-        </main>
+        </Wrapper>
         <hr className="w-full max-w-7xl mx-auto h-0.5 my-4 bg-gray-600 border-0 rounded md:my-4 dark:bg-gray-700" />
         <Footer/>
       </body>

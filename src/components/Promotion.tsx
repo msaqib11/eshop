@@ -11,17 +11,17 @@ const Promotion = () => {
         <div className="uppercase text-sm font-extrabold tracking-wide text-blue-600">
           PROMOTIONS
         </div>
-        <h1 className="scroll-m-20 text-3xl font-extrabold">
+        <h1 className="scroll-m-20 text-xl md:text-3xl font-extrabold">
           Our Promotions Events
         </h1>
       </div>
       {/* left section */}
       <div className="flex flex-col md:flex-row mt-6">
         <div className="flex flex-col gap-3  md:w-1/2">
-          <div className="bg-gray-300 flex justify-between items-center px-6">
+          <div className="bg-gray-300 flex flex-col justify-between items-center md:flex-row md:px-6">
             <div>
-              <h1 className="text-sm md:text-2xl font-extrabold">GET UP TO 60%</h1>
-              <p className="text-xs  md:text-lg">For the summer season</p>
+              <h1 className="text-xl md:text-2xl font-extrabold">GET UP TO 60%</h1>
+              <p className="text-sm  md:text-lg">For the summer season</p>
             </div>
             <Image src={event1} alt="" />
           </div>

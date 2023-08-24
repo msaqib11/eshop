@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [firstImage, setFirstImage] = useState<IImage | null>(null);
   const [product, setProduct] = useState<IProductDetail | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
-// Inside the "Page" component
+  // Inside the "Page" component
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleClick = (image: IImage) => {
@@ -72,17 +72,17 @@ export default function Page({ params }: { params: { slug: string } }) {
         {/* right section */}
         <div className="flex flex-col  md:flex-row gap-3">
           <div className="flex flex-row md:flex-col gap-3 order-2 md:order-1 md:w-24 md:h-24 w-16 h-16">
-            {product?.images?.map((image, index) => (
-              <Image
-                src={urlForImage(image).url()}
-                alt="product"
-                width={100}
-                height={100}
-                onClick={() => handleClick(image)}
-                key={index}
-              />
-            ))}
-
+              {product?.images?.map((image, index) => (
+                <Image
+                  src={urlForImage(image).url()}
+                  alt="product"
+                  width={100}
+                  height={100}
+                  onClick={() => handleClick(image)}
+                  key={index}
+                />
+              ))}
+            
             {/* <Image src={p1} alt="product" />
           <Image src={p1} alt="product" />
           <Image src={p1} alt="product" /> */}
@@ -101,7 +101,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         {/* left section */}
         <div className="flex flex-col justify-center md:ml-5 mt-5 md:mt-0">
-          <h1 className="text-2xl md:text-3xl whitespace-nowrap">{product?.name}</h1>
+          <h1 className="text-2xl md:text-3xl whitespace-nowrap">
+            {product?.name}
+          </h1>
           <p className="text-xl text-slate-400">{product?.subCategory.name}</p>
           <div className="mt-5">
             <h3>Select Size</h3>
@@ -109,10 +111,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           <ul className="flex gap-x-4 mt-8">
             {sizes.map((size, index) => (
               <li
-                className={ `flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 hover:cursor-pointer
-                ${
-                  selectedSize === size ? "border-2 border-black" : ""
-                }`}
+                className={`flex items-center justify-center  w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-100 hover:cursor-pointer
+                ${selectedSize === size ? "border-2 border-black" : ""}`}
                 onClick={() => handleSizeSelection(size)}
                 key={index}
               >
@@ -125,7 +125,6 @@ export default function Page({ params }: { params: { slug: string } }) {
               className="w-8 h-8 bg-slate-50 border border-black rounded-full"
               onClick={() => handleQuanity("-")}
             >
-              {" "}
               -
             </button>
             <span>{quantity}</span>
@@ -133,15 +132,17 @@ export default function Page({ params }: { params: { slug: string } }) {
               className="w-8 h-8 bg-slate-50 border border-black rounded-full"
               onClick={() => handleQuanity("+")}
             >
-              {" "}
-              +{" "}
+             
+              +
             </button>
           </div>
-          <div className="flex mt-8 gap-x-3">
-            <Button>
+          <div className="flex flex-col md:flex-row mt-8 gap-3">
+            <Button className="order-2 md:order-1">
               <ShoppingCart className="mr-2 h-4 w-4" /> Add To Cart
             </Button>
-            <p className="text-2xl">$ {getTotalPrice().toFixed(2)}</p>
+            <p className="text-2xl order-1 md:order-2 ">
+              $ {getTotalPrice().toFixed(2)}
+            </p>
           </div>
         </div>
       </div>

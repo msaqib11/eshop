@@ -12,6 +12,7 @@ import ProductDescription from "@/components/ProductDescription";
 const category = async (param: string) => {
   const res =
     await client.fetch(`*[_type == "product" && slug.current == "${param}"]{
+    _id,
     name,
     images,
     price,
@@ -79,7 +80,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   width={100}
                   height={100}
                   onClick={() => handleClick(image)}
-                  key={index}
+                  key={image._id as string} 
                 />
               ))}
             

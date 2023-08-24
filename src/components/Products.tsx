@@ -7,7 +7,7 @@ import { IProduct } from "@/lib/type";
 const Products: React.FC<IProduct> = ({ _id, price, name, subCategory, images, slug }) => {
   return (
     <Link
-      key={_id}
+     key={_id}
       href={`/product/${slug.current}`}
       className="flex flex-col cursor-pointer overflow-hidden rounded-sm">
       <Image src={urlForImage(images).url()} width={400} height={400} className={`object-cover object-top h-full w-full max-h-[350px] transition-transform duration-300 hover:scale-95 hover:scale-xy-90`} alt="product" />

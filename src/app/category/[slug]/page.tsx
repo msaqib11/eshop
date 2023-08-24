@@ -5,6 +5,7 @@ import { IProduct } from "@/lib/type";
 const category = async (param: string) => {
   const res =
     await client.fetch(`*[_type == "product" && category->name == "${param}"]{
+    _id,
     name,
     images,
     price,
@@ -28,12 +29,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {getCategory.map((product) => (
             <Products
+              key={product._id}
+              _id = {product._id}
               name={product.name}
               price={product.price}
               subCategory={product.subCategory}
               images={product.images}
-              slug = {product.slug}
-            />
+              slug={product.slug}      
+              />
           ))}
         </div>
       ) : (

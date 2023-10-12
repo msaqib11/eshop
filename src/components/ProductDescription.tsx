@@ -24,7 +24,7 @@ const ProductDescription : React.FC<Props> = ({description}) => {
         </div>
       </div>
       </div>
-    </>
+    </> 
   );
 };
 

@@ -33,7 +33,7 @@ const HotProdutcs = async () => {
           Check What We Have
         </h1>
       </div>
-      <div className="flex justify-evenly mt-16">
+      <div className="flex items-center justify-evenly mt-16 ">
         <Swiper
           slidesPerView={1}
           spaceBetween={10}

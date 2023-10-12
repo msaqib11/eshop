@@ -2,7 +2,7 @@ import { Image as IImage } from "sanity";
 
 
 export interface IProductDetail {
-    _id :number
+    _id :string
     name: string;
     price: number;
     description : string

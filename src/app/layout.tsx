@@ -3,6 +3,8 @@ import './globals.css'
 import { Sora } from 'next/font/google'
 import Footer from '@/components/layout/Footer'
 import Wrapper from '@/components/layout/Wrapper'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
 
 const sora = Sora({ subsets: ['latin'],weight : "600" })
 
@@ -22,6 +24,7 @@ export default function RootLayout({
         <Header/>
         <Wrapper className='min-h-screen'>
         {children}
+        <ToastContainer/>
         </Wrapper>
         <hr className="w-full max-w-7xl mx-auto h-0.5 my-4 bg-gray-600 border-0 rounded md:my-4 dark:bg-gray-700" />
         <Footer/>

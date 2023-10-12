@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { Image as IImage } from "sanity";
 import { urlForImage } from "../../../../sanity/lib/image";
 import ProductDescription from "@/components/ProductDescription";
+import { toast } from "react-toastify";
+import {useRouter} from "next/navigation"
 const category = async (param: string) => {
   const res =
     await client.fetch(`*[_type == "product" && slug.current == "${param}"]{
@@ -27,6 +29,7 @@ const category = async (param: string) => {
 };
 
 export default function Page({ params }: { params: { slug: string } }) {
+  const router = useRouter();
   const sizes: string[] = ["XS", "S", "ML", "L", "XL"];
   const [firstImage, setFirstImage] = useState<IImage | null>(null);
   const [product, setProduct] = useState<IProductDetail | null>(null);
@@ -55,6 +58,28 @@ export default function Page({ params }: { params: { slug: string } }) {
     setProduct(getProduct[0]);
   };
 
+  const handleSubmit = async () => {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      body: JSON.stringify({
+        quantity: quantity,
+        product_id: product?._id
+      })
+    })
+    const result = await res.json()
+    toast.success(`Product Added !`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    router.refresh()
+  }
+
   const getTotalPrice = () => {
     if (product) {
       return product.price * quantity;
@@ -67,23 +92,24 @@ export default function Page({ params }: { params: { slug: string } }) {
       fetchProduct(params.slug);
     }
   }, [params?.slug]);
+
   return (
     <>
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2">
         {/* right section */}
         <div className="flex flex-col  md:flex-row gap-3">
           <div className="flex flex-row md:flex-col gap-3 order-2 md:order-1 md:w-24 md:h-24 w-16 h-16">
-              {product?.images?.map((image, index) => (
-                <Image
-                  src={urlForImage(image).url()}
-                  alt="product"
-                  width={100}
-                  height={100}
-                  onClick={() => handleClick(image)}
-                  key={image._id as string} 
-                />
-              ))}
-            
+            {product?.images?.map((image, index) => (
+              <Image
+                src={urlForImage(image).url()}
+                alt="product"
+                width={100}
+                height={100}
+                onClick={() => handleClick(image)}
+                key={image._id as string}
+              />
+            ))}
+
             {/* <Image src={p1} alt="product" />
           <Image src={p1} alt="product" />
           <Image src={p1} alt="product" /> */}
@@ -133,12 +159,12 @@ export default function Page({ params }: { params: { slug: string } }) {
               className="w-8 h-8 bg-slate-50 border border-black rounded-full"
               onClick={() => handleQuanity("+")}
             >
-             
+
               +
             </button>
           </div>
           <div className="flex flex-col md:flex-row mt-8 gap-3">
-            <Button className="order-2 md:order-1">
+            <Button className="order-2 md:order-1" onClick={handleSubmit}>
               <ShoppingCart className="mr-2 h-4 w-4" /> Add To Cart
             </Button>
             <p className="text-2xl order-1 md:order-2 ">

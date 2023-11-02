@@ -5,10 +5,12 @@ import Quantity from "@/components/Quantity"
 import { Image as IImage } from "sanity"
 import React from "react"
 import { urlForImage } from "../../sanity/lib/image";
+import DeleteCartItem from "./DeleteCartItem"
 interface ICartItem {
     id: string
     product_id: string
     quantity: number
+    user_id : string
 }
 
 interface IProduct {
@@ -38,7 +40,7 @@ const CartItems: React.FC<{ item: ICartItem, product: IProduct }> = ({ item, pro
                 <Quantity qty={item.quantity} />
             </div>
             <div className="flex items-center">
-                <Trash2 color="red" className="cursor-pointer" />
+                <DeleteCartItem product_id ={product._id} user_id = {item.user_id}/>
             </div>
         </div>
     )

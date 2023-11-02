@@ -1,5 +1,6 @@
 import CartCount from "@/components/CartCount";
 import CartItems from "@/components/CartItems";
+import { Button } from "@/components/ui/button";
 import { client } from "@/lib/sanityClient";
 import { BaggageClaim } from "lucide-react";
 import { cookies } from "next/headers";
@@ -52,11 +53,11 @@ const page = async () => {
     return acc + item.quantity * product.price;
   },0)
  
- const tax = () => {
-  const Total = subTotal;
-  const tax = (Total * 2)/100;
-  return tax; 
- }
+//  const tax = () => {
+//   const Total = subTotal;
+//   const tax = (Total * 2)/100;
+//   return tax; 
+//  }
   if (getData.length === 0) {
     return (
       <div className="flex flex-col justify-center py-20 lg:px-20 items-center">
@@ -95,7 +96,7 @@ const page = async () => {
 
 
         </div>
-        <div className="bg-gray-50 rounded-lg md:ml-10 my-3 md:my-0 md:col-span-1 max-h-40">
+        <div className="bg-gray-50 rounded-lg md:ml-10 my-3 md:my-0 md:col-span-1 max-h-80 pb-8">
           <div className="px-4 py-6 sm:px-6">
             <p>Order summary</p>
           </div>
@@ -105,11 +106,15 @@ const page = async () => {
             <p className="my-2 text-sm">Subtotal:</p>
           </div>
             <div>
-            <p className="my-2 text-sm"> $ {`${(tax().toFixed(2))}`}</p>
-            <p className="my-2 text-sm"> $ <CartCount/></p>
+            <p className="my-2 text-sm"> <CartCount/></p>
+            <p className="my-2 text-sm"> $ {`${(subTotal.toFixed(2))}`}</p>
             </div>
             
           </div>
+         <div className="p-4" >
+            <Button className="w-full">Checkout</Button>
+         </div>
+         
         </div>
       </div>
     </>

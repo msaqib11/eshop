@@ -59,7 +59,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   };
 
   const handleSubmit = async () => {
-    const res = await fetch("/api/cart", {
+    const baseUrl = process.env.BASE_URL
+    const res = await fetch(`${baseUrl}/api/cart`, {
       method: "POST",
       body: JSON.stringify({
         quantity: quantity,
@@ -69,7 +70,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const result = await res.json()
     toast.success(`Product Added !`, {
       position: "top-center",
-      autoClose: 3000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

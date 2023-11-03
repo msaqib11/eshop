@@ -14,13 +14,14 @@ interface Props {
 const DeleteCartItem = ({product_id,user_id}:Props) => {
 const router = useRouter()
     const handleSubmit = async (product_id:string,user_id:string) => {
-        const res = await fetch(`/api/cart?user_id=${user_id}&product_id=${product_id}`, {
+      const baseUrl = process.env.BASE_URL
+        const res = await fetch(`${baseUrl}/api/cart?user_id=${user_id}&product_id=${product_id}`, {
             method: "DELETE",
           })
           const result = await res.json()
           toast.warning(`Product Deleted !`, {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
